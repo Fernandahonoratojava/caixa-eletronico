@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Caixa Eletrônico</title>
+
+	<script>
+		
+		var saldo = 100.5; //Variavel Global
+		var nome = (prompt("Por favor, Digite o seu nome:"));
+
+		if (nome === '' || nome ===0 ){
+			alert('Digite um nome válido');
+			var nome = (prompt("Por favor, Digite o seu nome:"));
+		}
+
+		else{
+		alert("*****Olá "+ nome +", é um prazer ter você por aqui!*****");
+		}
+		function inicio() {
+			//ESCOPO
+			//Variavel Local
+			var escolha = (prompt('Selecione uma opção 1.) Saldo 2.) Extrato 3.) Saque 4.) Depósito 5.) Tranferência 6.) Sair'));
+				
+			switch (escolha){
+			case "1": 
+				validar_senha();
+				ver_saldo();
+				break;
+			case "2":
+				validar_senha();
+				ver_extrato();
+				break;
+			case "3":
+				validar_senha();
+				fazer_saque();
+				break;
+			case "4":
+				fazer_deposito();
+				break;
+			case "5":
+				validar_senha();
+				fazer_transferencia();
+				break;
+			case "6":
+				sair();
+				break;
+			default:
+				erro();
+			}
+		}
+
+		function validar_senha() {
+			
+			var senha = parseFloat(prompt('Por favor digite sua senha'));
+
+			if (isNaN(senha) || senha === '' || senha ===0 || senha <0 ) {
+				alert('Por favor, informe uma senha válida.');
+				validar_senha();
+		}
+
+			else if (senha != 3589) {
+				alert('Senha incorreta. Digite novamente.');
+				validar_senha();
+			}
+
+			else {
+				alert ('Senha validada')
+				this.method = function() {
+                 return this;
+			}
+		}
+	}
+		function ver_saldo() {
+			alert('Seu saldo atual é: ' + saldo);
+			inicio();
+		}
+
+		function fazer_deposito() {
+			
+			var deposito = parseFloat(prompt('Qual o valor para depósito?'));
+			
+			// Not a Number --> Isso é um não-número?
+			if (isNaN(deposito) || deposito === '' ) {
+				alert('Por favor, informe um número.');
+				fazer_deposito();
+
+			}else if (deposito ===0 || deposito<0){
+				alert('Operação não autorizada.');
+				fazer_deposito();
+			}
+		     else {
+				saldo += deposito;
+				//saldo = saldo + deposito;
+				alert('Depósito realizado com sucesso.')
+				ver_saldo();
+			}
+		}
+
+		function fazer_saque() {
+			
+			var saque = parseFloat(prompt('Qual o valor para saque?'));
+			
+			if (isNaN(saque) || saque === '' || saque === 0) {
+				alert('Por favor, informe um número válido.');
+				fazer_saque();
+			}
+			else if (saque>saldo){
+				alert("Operação não autorizada.")
+				fazer_saque();
+			} else {
+				saldo -= saque;
+				//saldo = saldo - saque;
+				ver_saldo();
+			}
+		}
+
+		function erro() {
+			alert('Por favor, informe um número entre 1 e 6.');
+			inicio();
+		}
+
+		function ver_extrato() {
+			alert('         **********LANÇAMENTOS********** \n'+
+				  '01/07/2022   compra lojas americanas     -R$50,00 \n'+
+				  '20/06/2022   compra mercado joao         -R$200,00 \n'+
+				  '22/05/2022   depósito maria aparecida    +R$250,00 \n'+
+				  '10/05/2022   pix joana ferreira          +R$200,00 \n' +
+				  '01/05/2055   transferencia               -R$50,00 \n' )
+				  inicio();
+		}
+		
+		function fazer_transferencia() {
+			var conta = parseFloat(prompt('Por favor digite o número da conta:'));
+		
+			
+
+			while (isNaN(conta) || conta === '' || conta ===0 || conta<0) {
+				alert('Por favor, informe um número válido.');
+				fazer_transferencia();
+			}
+			var transferencia = parseFloat(prompt('Digite o valor a ser transferido:'));
+			
+			while  (isNaN(transferencia) || transferencia === '' || transferencia ===0 || transferencia<0 || transferencia>saldo){
+				alert('Operação não autorizada.')
+				fazer_transferencia();
+			}	
+				
+				saldo -= transferencia;
+				//saldo = saldo - transferencia;
+				alert('Tranferência realizada com sucesso!')
+				ver_saldo();
+			}
+			
+
+
+		function sair() {
+			var confirma = confirm('Você deseja sair?');
+			if (confirma) {
+				alert('*****'+nome + ', foi um prazer ter você por aqui!*****')
+				window.close();
+			} else {
+				inicio();
+			}
+		}
+
+		inicio();
+	</script>
+</head>
+
+<body>
+
+</body>
+
+</html>
